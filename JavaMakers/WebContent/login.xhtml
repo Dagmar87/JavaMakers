@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>LOGIN</title>
+</h:head>
+
+<h:body>
+	<h:form id="formLogin">
+
+		<p:dialog header="Login" modal="true" visible="true">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="CPF: " />
+				<p:inputMask mask="999.999.999-99" value="#{LoginBean.cpfTela}" />
+				<p:outputLabel value="Senha:  " />
+				<p:password value="#{LoginBean.senhaTela}" />
+
+				<p:commandButton value="Entrar" action="#{LoginBean.entrar}" 
+					update="@form"/>
+				
+				<p:commandButton value="Criar Usuário"
+					onclick="PF('criarUsuario').show();" />
+				
+			</p:panelGrid>
+		</p:dialog>
+
+		<p:dialog header="Criar Usuário" widgetVar="criarUsuario" modal="true">
+			<p:panelGrid columns="2">
+				<p:outputLabel value="CPF: " />
+				<p:inputMask mask="999.999.999-99" value="#{LoginBean.usuario.cpf}" />
+				<p:outputLabel value="Email: " />
+				<p:inputText value="#{LoginBean.usuario.email}" />
+				<p:outputLabel value="Nome: " />
+				<p:inputText value="#{LoginBean.usuario.nome}" />
+				<p:outputLabel value="Idade: " />
+				<p:inputText value="#{LoginBean.usuario.idade}" />
+				<p:outputLabel value="Senha:  " />
+				
+				<p:password value="#{LoginBean.usuario.senha}" />
+
+				<p:commandButton value="Salvar"
+					actionListener="#{LoginBean.criarUsuario}" update="@form" />
+			</p:panelGrid>
+		</p:dialog>
+		
+	</h:form>
+</h:body>
+</html>

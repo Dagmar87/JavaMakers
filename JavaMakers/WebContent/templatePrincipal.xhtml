@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Projeto JavaMakers Fuctura</title>
+</h:head>
+<h:body>
+<h:form>
+	<table border="2" style="width: 100%">
+		<tr>
+			<td colspan="2"> 	
+				<ui:insert name="cabecalho">
+					<h1>Projeto JavaMakers Fuctura</h1>
+				</ui:insert>
+			</td>			
+		</tr>
+		<tr>
+			<td width="20%">
+				<ui:insert name="menu">
+			     	<p:panelMenu> 
+			     		<p:submenu label="JavaMakers">
+			     		<p:menuitem value="Login" action="/login.xhtml" icon="pi pi-save" />
+			     		<p:menuitem value="C. Pedido" action="/paginas/pedido/cadastroPedido.xhtml" icon="pi pi-save" />
+			     		<p:menuitem value="P. Pedido" action="/paginas/pedido/pesquisaPedido.xhtml" icon="pi pi-save" />
+			     		</p:submenu>
+			     	</p:panelMenu>			     	
+			    </ui:insert>
+			</td>
+			<td>
+				<ui:insert name="conteudo">
+			     	Conteudo
+			    </ui:insert>
+			</td>
+		</tr>
+	</table>
+</h:form>	
+</h:body>
+</html>
+

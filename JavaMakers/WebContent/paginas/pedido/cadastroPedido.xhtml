@@ -1,0 +1,76 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets" >
+
+	
+	<ui:composition template="/templatePrincipal.xhtml">
+		<ui:define name="cabecalho">
+			<h1 align="center">Cadastro de Pedido</h1>
+		</ui:define>
+		<ui:define name="conteudo">
+		
+			<p:growl id="growl" showDetail="true" sticky="true" />
+		
+			<p:panelGrid columns="3" style="width: 100%">
+				<p:outputLabel value="Fornecedor: " />
+				<p:inputText value="#{PedidoBean.pedido.fornecedor}" />
+				<p:outputLabel value="#{PedidoBean.pedido.data}" />
+
+				<p:outputLabel value="Valor: " />
+				<p:inputNumber value="#{PedidoBean.pedido.valor}" />
+				<p:outputLabel value="#{PedidoBean.pedido.usuario.nome}" />
+			</p:panelGrid>			
+			<p:fieldset legend="Veiculo">
+				<p:panelGrid columns="4" style="width: 100%">
+					<p:outputLabel value="Placa: " />
+					<p:inputText value="#{PedidoBean.pedido.veiculo.placa}" />
+					<p:outputLabel value="Modelo:" />
+					<p:inputText value="#{PedidoBean.pedido.veiculo.modelo}" />
+
+					<p:outputLabel value="Fabricante: " />
+					<p:inputText value="#{PedidoBean.pedido.veiculo.fabricante}" />
+					<p:outputLabel value="Cor:" />
+					<p:inputText value="#{PedidoBean.pedido.veiculo.cor}" />
+
+					<p:outputLabel value="Ano: " />
+					<p:inputText value="#{PedidoBean.pedido.veiculo.ano}" />
+				</p:panelGrid>
+			</p:fieldset>
+			<p:fieldset legend="Peças">
+				<p:panelGrid columns="3" style="width: 100%">
+					<p:outputLabel value="Peça: " />
+
+					<p:selectOneMenu value="#{PedidoBean.idPeca}" >
+						<f:selectItem itemLabel="Selecione um ..." itemValue="" />
+						<f:selectItems value="#{PedidoBean.listaPecas}" var="peca" 
+							itemLabel="#{peca.modelo}" itemValue="#{peca.id}">
+					
+						</f:selectItems>
+					</p:selectOneMenu>
+
+					<p:commandButton value="Adicionar" actionListener="#{PedidoBean.adicionarPeca}" 
+							update="@form"/>
+						
+				</p:panelGrid>
+				<p:dataTable value="#{PedidoBean.pedido.listaPedidoPeca}" var="pedidoPeca">
+					<p:column headerText="Tipo">
+						<h:outputText value="#{pedidoPeca.peca.tipo}" />
+					</p:column>
+					<p:column headerText="Modelo">
+						<h:outputText value="#{pedidoPeca.peca.modelo}" />
+					</p:column>
+					<p:column headerText="Remover" width="15%">
+						<p:commandButton value="Remover" action="#{PedidoBean.removerPeca}" update="@form" >
+					 		<f:setPropertyActionListener
+								target="#{PedidoBean.idPeca}" value="#{pedidoPeca.peca.id}" />
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:fieldset>
+			<p:commandButton value="SALVAR" actionListener="#{PedidoBean.salvarPedido}" update="@form" /> 
+		</ui:define>
+	</ui:composition>
+
+</html>
